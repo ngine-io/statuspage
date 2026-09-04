@@ -1,0 +1,15 @@
+{{ $incidents := where .Site.RegularPages "Params.section" "issue" }}
+
+{{ $active := where $incidents "Params.resolved" "=" false }}
+{{ $isNotice := where $active "Params.severity" "=" "notice" }}
+{{ $isDisrupted := where $active "Params.severity" "=" "disrupted" }}
+{{ $isDown := where $active "Params.severity" "=" "down" }}
+
+<a href="{{ .Site.BaseURL }}" rel="noopener"
+    class="hidden sm:inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase text-base-content/70 transition-colors hover:text-primary">
+    <span class="relative flex h-2 w-2">
+        <span class="absolute inline-flex h-full w-full rounded-full bg-{{ if $isDown }}error{{ else }}{{ if $isDisrupted}}warning{{ else }}success{{ end }}{{ end }} opacity-70 motion-safe:animate-ping"></span>
+        <span class="relative inline-flex h-2 w-2 rounded-full bg-{{ if $isDown }}error{{ else }}{{ if $isDisrupted}}warning{{ else }}success{{ end }}{{ end }}"></span>
+    </span>
+    Status
+</a>

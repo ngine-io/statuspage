@@ -413,6 +413,7 @@ outputs:
     - json
     - rss
     - svg
+    - status
   term:
     - html
     - json
@@ -423,3 +424,10 @@ outputFormats:
   svg:
     isPlainText: true
     mediaType: image/svg+xml
+  # Embeddable status badge, rendered to /status.html from
+  # layouts/index.status.html for inclusion on other sites.
+  status:
+    mediaType: text/html
+    baseName: status
+    isHTML: true
+    notAlternative: true
